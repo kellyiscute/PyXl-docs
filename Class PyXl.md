@@ -11,7 +11,7 @@ PyXl对应一个Excel文件，接受一个可选`path: str`参数
 ### 函数签名
 
 ```python
-def __init__(self, path: Optional[str]=None, password: Optional[str]=None, excelize: Optional[Excelize]=None):
+def __init__(self, path: Optional[str]=None, password: Optional[str]=None):
   ...
 ```
 
@@ -24,16 +24,6 @@ def __init__(self, path: Optional[str]=None, password: Optional[str]=None, excel
 #### password
 
 可选，当打开带有密码保护的Excel工作簿时传入
-
-#### excelize
-
-可选，传入时使用传入的 `excelize` 对象作为底层API接口，未传入时使用全局 `excelize` 对象。当全局 `excelize`对象初始化失败并未传入 `excelize` 对象时报错 `ExcelizeNotDefinedException: "No global excelize instatiated and no excelize object passed in"`
-
-### 异常
-
-#### ExcelizeNotDefinedException
-
-当无全局`excelize`对象存在且参数中未传入`excelize`对象时抛出
 
 ---
 
@@ -115,4 +105,29 @@ def save(self, path: Optional[str]=None) -> None:
 当无初始路径且保存时未传入路径时抛出
 
 ---
+
+## import_sheet()
+
+### 函数签名
+
+```python
+def import_sheet(self, sheet: Sheet) -> Sheet:
+  ...
+```
+
+### 参数
+
+#### sheet
+
+必须，传入需要从别的工作簿中拷贝的工作表
+
+### 返回
+
+当前工作簿中的工作表副本
+
+### 异常
+
+#### DuplicatedSheetNameException
+
+当目标工作簿中存在同名工作表时抛出
 
